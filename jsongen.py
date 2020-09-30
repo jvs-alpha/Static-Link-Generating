@@ -13,10 +13,13 @@ def jsongen(dir, filename, url):
             # so we just need to add this to variable and call the recursion
             jsongen(os.path.join(dir, file), filename, url + file + "/")
             continue
-        filedict[file] = url + file
+        if file in list(filedict.keys()):
+            filedict[file + "1"] = url + file
+        else:
+            filedict[file] = url + file
     jsonv = json.dumps(filedict, indent=True)
     print(jsonv)
-    with open(args.filename, "w") as f:
+    with open(filename, "w") as f:
         f.write(jsonv)
 
 
