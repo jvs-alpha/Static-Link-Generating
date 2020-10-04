@@ -14,9 +14,9 @@ def jsongen(dir, filename, url):
             jsongen(os.path.join(dir, file), filename, url + file + "/")
             continue
         if file in list(filedict.keys()):
-            filedict[file + "1"] = url + file
+            filedict[file.replace("-", "_").replace(".", "_") + "_1"] = url + file
         else:
-            filedict[file] = url + file
+            filedict[file.replace("-", "_").replace(".", "_")] = url + file
     jsonv = json.dumps(filedict, indent=True)
     print(jsonv)
     with open(filename, "w") as f:
